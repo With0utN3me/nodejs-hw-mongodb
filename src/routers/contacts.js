@@ -2,16 +2,38 @@ import { Router } from "express";
 import { getContactsController, getContactByIdController, createContactController, patchContactController, deleteContactController } from "../controllers/contacts.js";
 import { validateBody } from '../middlewares/validateBody.js';
 import { createContactSchema, updateContactSchema } from "../validation/contacts.js";
+import { authenticate } from '../middlewares/authenticate.js';
 import { ctrlWrapper } from "../utils/ctrlWrapper.js";
+import { checkRoles } from '../middlewares/checkRoles.js';
+import { ROLES } from '../constants/index.js';
 
 const router = Router();
-router.get('/contacts', ctrlWrapper(getContactsController));
+router.use(authenticate);
 
-router.get('/contacts/:contactId', ctrlWrapper(getContactByIdController));
+router.get('/', 
+    checkRoles(ROLES.ADMIN),
+    ctrlWrapper(getContactsController)
+);
 
-router.post('/contacts', validateBody(createContactSchema), ctrlWrapper(createContactController));
+router.get('/:contactId',
+    checkRoles(ROLES.ADMIN, ROLES.USER),
+    ctrlWrapper(getContactByIdController)
+);
 
-router.patch('/contacts/:contactId', validateBody(updateContactSchema), ctrlWrapper(patchContactController));
+router.post('/', 
+    checkRoles(ROLES.ADMIN),
+    validateBody(createContactSchema), 
+    ctrlWrapper(createContactController)
+);
 
-router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
+router.patch('/:contactId', 
+    checkRoles(ROLES.ADMIN, ROLES.USER),
+    validateBody(updateContactSchema), 
+    ctrlWrapper(patchContactController)
+);
+
+router.delete('/:contactId', 
+    checkRoles(ROLES.ADMIN, ROLES.USER),
+    ctrlWrapper(deleteContactController)
+);
 export default router;
