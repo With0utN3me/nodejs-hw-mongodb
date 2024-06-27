@@ -44,7 +44,15 @@ export const getContactById = async (contactId) => {
     return contact;
 };
 
-export const createContact = async (payload) => {
+export const createContact = async (req) => {
+    const payload = {
+        name: req.body.name,
+        phoneNumber: req.body.phoneNumber,
+        email: req.body.email,
+        isFavourite: req.body.isFavourite,
+        contactType: req.body.contactType,
+        userId: req.user._id,
+    };
     const contact = await ContactsCollection.create(payload);
     return contact;
 };
