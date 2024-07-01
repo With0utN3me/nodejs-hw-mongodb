@@ -5,11 +5,13 @@ import { parseFilterParams } from '../utils/parseFilterParams.js';
 import createHttpError from 'http-errors';
 
 export const getContactsController = async (req, res) => {
+    const userId = req.user._id; 
     const { page, perPage } = parsePaginationParams(req.query);
     const { sortBy, sortOrder } = parseSortParams(req.query);
     const filter = parseFilterParams(req.query);
 
     const contacts = await getAllContacts({
+        userId,
         page, 
         perPage,
         sortBy,
