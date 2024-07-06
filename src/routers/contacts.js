@@ -6,6 +6,8 @@ import { authenticate } from '../middlewares/authenticate.js';
 import { ctrlWrapper } from "../utils/ctrlWrapper.js";
 import { checkUserId } from '../middlewares/checkUserId.js';
 
+import { upload } from '../middlewares/multer.js';
+
 const router = Router();
 router.use(authenticate);
 
@@ -19,12 +21,14 @@ router.get('/:contactId',
 );
 
 router.post('/', 
+    upload.single('photo'),
     validateBody(createContactSchema), 
     ctrlWrapper(createContactController)
 );
 
 router.patch('/:contactId', 
     checkUserId,
+    upload.single('photo'),
     validateBody(updateContactSchema), 
     ctrlWrapper(patchContactController)
 );
