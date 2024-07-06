@@ -44,9 +44,6 @@ export const getContactByIdController = async (req, res, next) => {
     });
 };
 export const createContactController = async (req, res) => {
-
-    console.log('req.body:', req.body);
-    console.log('req.file:', req.file);
     const contact = await createContact(req);
     res.status(201).json({
         status: 201,
