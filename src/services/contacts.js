@@ -74,6 +74,7 @@ export const createContact = async (req) => {
 };
 
 export const updateContact = async (contactId, payload, options = {}) => {
+    Object.keys(payload).forEach(key => (payload[key] === undefined || payload[key] === '') && delete payload[key]);
     const rawResult = await ContactsCollection.findOneAndUpdate(
         { _id: contactId },
         payload,
