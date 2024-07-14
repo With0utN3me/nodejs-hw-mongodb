@@ -10,16 +10,18 @@ export const checkUserId = async (req, res, next) => {
     }
     const { contactId } = req.params;
     if (!contactId) {
-        next(createHttpError(403));
-        return;
+        return next(createHttpError(400, 'Contact id is required'));
     }
 
     const contact = await ContactsCollection.findOne({
         _id: contactId,
-        userId: user._id,
     });
 
-    if (contact) {
+    if (!contact) {
+        return next(createHttpError(404, 'Contact not found'));
+    }
+
+    if (contact.userId.toString() === user._id.toString()) {
         next();
         return;    
     }

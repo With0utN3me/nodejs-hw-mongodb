@@ -12,6 +12,8 @@ tags:
     description: Operations about users.
 servers:
   - url: <https://nodejs-hw-mongodb-dbyx.onrender.com>
+  # - url: http://localhost:3000
+    #   description: Local development server
 paths:
   /contacts:
     get:
@@ -21,6 +23,10 @@ paths:
   /contacts/{id}:
     get:
       $ref: ../swagger/paths/contacts/{id}/get.yaml
+    delete: 
+      $ref: ../swagger/paths/contacts/{id}/delete.yaml
+    patch: 
+      $ref: ../swagger/paths/contacts/{id}/patch.yaml
 components:
   securitySchemes:
     bearerAuth:
