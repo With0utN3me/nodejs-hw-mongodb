@@ -2,16 +2,16 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "<Contacts app>",
+    "title": "Contacts app",
     "license": {
       "name": "Apache 2.0",
-      "url": "<http://www.apache.org/licenses/LICENSE-2.0.html>"
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "<This is a documentation of contacts app>\n"
+    "description": "This is a documentation of contacts app\n"
   },
   "servers": [
     {
-      "url": "<https://nodejs-hw-mongodb-dbyx.onrender.com>"
+      "url": "https://nodejs-hw-mongodb-dbyx.onrender.com"
     }
   ],
   "tags": [
@@ -539,7 +539,7 @@
           "photo": {
             "description": "Link to contact's photo",
             "type": "string",
-            "example": "<https://res.cloudinary.com/uqwgdu/image/upload/image.png>"
+            "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
           }
         }
       }
