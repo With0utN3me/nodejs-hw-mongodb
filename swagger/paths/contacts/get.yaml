@@ -38,7 +38,7 @@ parameters:
     schema:
       type: string
       enum: ['work', 'home', 'personal']
-      example: home
+      example: work
 responses:
   '200':
     description: Successfully found contacts!
